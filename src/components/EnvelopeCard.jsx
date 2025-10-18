@@ -93,7 +93,7 @@ export default function EnvelopeCard() {
             },
           }}
         >
-          You've Got Mail! 💌
+          You've Got Mail 💌
         </Typography>
       )}
 
@@ -211,7 +211,8 @@ export default function EnvelopeCard() {
                 mb: 3,
               }}
             >
-              Here's to celebrating you today and always. Happy Birthday my Best Friend. 🎉🎂🎈
+              Here's to celebrating you today and always. 
+              Happy Birthday my Best Friend, My Khuchu-Puchu. 🎉🎂🎈
             </Typography>
 
             <Typography

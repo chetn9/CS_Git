@@ -791,7 +791,7 @@ const BirthdayPage = () => {
                 },
               }}
             >
-              just for you
+              just for you Khuchu-Puchu 🎀
             </Typography>
           </Box>
         </Box>
