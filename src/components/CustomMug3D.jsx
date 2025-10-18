@@ -246,7 +246,7 @@ const CustomMug3D = () => {
   };
   
   return (
-    <Box sx={{ width: "100%", height: 450, position: "relative", pointerEvents: 'none',
+    <Box sx={{ width: "100%", height: 450, position: "relative",
     WebkitUserDrag: 'none',
     userDrag: 'none',
     WebkitUserSelect: 'none',
