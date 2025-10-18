@@ -32,6 +32,7 @@ import hm_1 from "./assets/photos/hm_1.jpg";
 import h_1 from "./assets/photos/h_1.jpg";
 import h_2 from "./assets/photos/h_2.jpg";
 import EnvelopeCard from "./components/EnvelopeCard";
+import Footer from "./components/Footer";
 
 const BirthdayPage = () => {
   const birthdayImages = [
@@ -900,6 +901,8 @@ const BirthdayPage = () => {
           </CardContent>
         </Card>
       </Grid>
+
+      <Footer/>
     </>
   );
 };
