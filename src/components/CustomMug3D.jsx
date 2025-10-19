@@ -35,7 +35,7 @@ function Fireworks({ isActive }) {
         particle.position.y += particles[i].velocity[1];
         particle.position.x += particles[i].velocity[0];
         particle.position.z += particles[i].velocity[2];
-        
+
         if (particle.position.y > 4) {
           particle.position.y = 1;
         }
@@ -60,14 +60,14 @@ function Fireworks({ isActive }) {
 function MugModel({ texture, isOpen }) {
   const loadedTexture = useTexture(texture);
   const groupRef = useRef();
-  
+
   // Smooth rotation animation
   useFrame((state, delta) => {
     if (groupRef.current && !isOpen) {
       groupRef.current.rotation.y += delta * 0.3;
     }
   });
-  
+
   // Configure texture to show image twice (front and back)
   loadedTexture.wrapS = THREE.RepeatWrapping;
   loadedTexture.wrapT = THREE.RepeatWrapping;
@@ -77,7 +77,7 @@ function MugModel({ texture, isOpen }) {
   const { lidPosition, lidRotation } = useSpring({
     lidPosition: isOpen ? [0, 2.5, 0] : [0, 1.1, 0],
     lidRotation: isOpen ? [0, 0, Math.PI * 0.3] : [0, 0, 0],
-    config: { tension: 120, friction: 14 }
+    config: { tension: 120, friction: 14 },
   });
 
   // Create handle shape using curve
@@ -96,8 +96,8 @@ function MugModel({ texture, isOpen }) {
       {/* Main mug body with two images */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.8, 0.9, 2.2, 64, 1, false]} />
-        <meshStandardMaterial 
-          map={loadedTexture} 
+        <meshStandardMaterial
+          map={loadedTexture}
           roughness={0.3}
           metalness={0.1}
         />
@@ -106,8 +106,8 @@ function MugModel({ texture, isOpen }) {
       {/* Inner wall of the mug */}
       <mesh position={[0, 0.05, 0]}>
         <cylinderGeometry args={[0.74, 0.84, 2.0, 64, 1, false]} />
-        <meshStandardMaterial 
-          color="#f8f8f8" 
+        <meshStandardMaterial
+          color="#f8f8f8"
           roughness={0.4}
           side={THREE.FrontSide}
         />
@@ -116,7 +116,7 @@ function MugModel({ texture, isOpen }) {
       {/* Coffee liquid inside the mug */}
       <mesh position={[0, 0.65, 0]}>
         <cylinderGeometry args={[0.73, 0.83, 0.05, 64]} />
-        <meshStandardMaterial 
+        <meshStandardMaterial
           color="#3d2817"
           roughness={0.1}
           metalness={0.3}
@@ -128,7 +128,7 @@ function MugModel({ texture, isOpen }) {
       {/* Coffee surface */}
       <mesh position={[0, 0.675, 0]} rotation={[0, 0, 0]}>
         <circleGeometry args={[0.73, 64]} />
-        <meshStandardMaterial 
+        <meshStandardMaterial
           color="#4a3322"
           roughness={0.15}
           metalness={0.4}
@@ -140,43 +140,28 @@ function MugModel({ texture, isOpen }) {
       {/* Animated Top rim/lid */}
       <animated.mesh position={lidPosition} rotation={lidRotation}>
         <cylinderGeometry args={[0.85, 0.8, 0.15, 64]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
+        <meshStandardMaterial
+          color="#ffffff"
           roughness={0.2}
           metalness={0.05}
         />
       </animated.mesh>
 
       {/* Coffee mug handle - tube part */}
-      <mesh 
-        geometry={handleShape}
-        position={[0.85, 0, 0]}
-      >
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.3} 
-          metalness={0.1}
-        />
+      <mesh geometry={handleShape} position={[0.85, 0, 0]}>
+        <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Handle bottom connection */}
       <mesh position={[1.35, -0.6, 0]}>
         <sphereGeometry args={[0.12, 16, 16]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.3} 
-          metalness={0.1}
-        />
+        <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Handle top connection */}
       <mesh position={[0.85, 0.6, 0]}>
         <sphereGeometry args={[0.12, 16, 16]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.3} 
-          metalness={0.1}
-        />
+        <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Happy Birthday Text - shows when opened */}
@@ -213,7 +198,7 @@ const CustomMug3D = () => {
 
   const handleOpenMug = () => {
     setIsOpen(true);
-    
+
     // Trigger confetti fireworks
     const duration = 3000;
     const end = Date.now() + duration;
@@ -224,14 +209,14 @@ const CustomMug3D = () => {
         angle: 60,
         spread: 55,
         origin: { x: 0, y: 0.6 },
-        colors: ['#FFD700', '#FF69B4', '#00CED1', '#FF6347']
+        colors: ["#FFD700", "#FF69B4", "#00CED1", "#FF6347"],
       });
       confetti({
         particleCount: 5,
         angle: 120,
         spread: 55,
         origin: { x: 1, y: 0.6 },
-        colors: ['#FFD700', '#FF69B4', '#00CED1', '#FF6347']
+        colors: ["#FFD700", "#FF69B4", "#00CED1", "#FF6347"],
       });
 
       if (Date.now() < end) {
@@ -244,24 +229,46 @@ const CustomMug3D = () => {
   const handleCloseMug = () => {
     setIsOpen(false);
   };
-  
+
   return (
-    <Box sx={{ width: "100%", height: 450, position: "relative",
-    WebkitUserDrag: 'none',
-    userDrag: 'none',
-    WebkitUserSelect: 'none',
-    userSelect: 'none',
-    WebkitTouchCallout: 'none', }}>
-      <Input 
-        type="file" 
-        fullWidth 
-        onChange={e => {
-          if (e.target.files[0]) {
-            setMugTexture(URL.createObjectURL(e.target.files[0]));
-          }
-        }} 
-      />
-      
+    <Box
+      sx={{
+        width: "100%",
+        height: 450,
+        position: "relative",
+        WebkitUserDrag: "none",
+        userDrag: "none",
+        WebkitUserSelect: "none",
+        userSelect: "none",
+        WebkitTouchCallout: "none",
+      }}
+    >
+      <Button
+        component="label"
+        variant="contained"
+        color="secondary"
+        fullWidth
+        sx={{
+          // margin: 2,
+          padding: "12px 24px",
+          borderRadius: 2,
+          textTransform: "none",
+          fontSize: "16px",
+        }}
+      >
+        Customize Your Mug
+        <input
+          type="file"
+          hidden
+          accept="image/*"
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setMugTexture(URL.createObjectURL(e.target.files[0]));
+            }
+          }}
+        />
+      </Button>
+
       {/* 2D HTML Overlay Text */}
       {isOpen && (
         // <Typography
@@ -292,17 +299,13 @@ const CustomMug3D = () => {
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
         <directionalLight position={[-10, 5, -5]} intensity={1} />
         <pointLight position={[0, 5, 10]} intensity={1} />
-        <OrbitControls 
-          enablePan={false}
-          minDistance={4}
-          maxDistance={10}
-        />
+        <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
         <MugModel texture={mugTexture} isOpen={isOpen} />
       </Canvas>
-      
+
       {/* Floating Action Button to open mug */}
-      <Fab 
-        color="primary" 
+      <Fab
+        color="primary"
         sx={{ position: "absolute", bottom: 80, right: 20 }}
         onClick={isOpen ? handleCloseMug : handleOpenMug}
       >

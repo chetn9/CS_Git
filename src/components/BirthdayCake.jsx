@@ -14,7 +14,7 @@ function CandleFlame({ isLit, position }) {
     if (flameRef.current && isLit) {
       const time = state.clock.elapsedTime;
       // Flickering animation for flame size
-      flameRef.current.scale.y = 1 + Math.sin(time * 10) * 0.1;
+      flameRef.current.scale.y = 1 + Math.sin(time * 10) * 0.5;
       flameRef.current.scale.x = 1 + Math.sin(time * 8) * 0.05;
 
       // Flickering light intensity
@@ -149,70 +149,70 @@ export default function BirthdayCake() {
     const colors = ["#FFD700", "#FF69B4", "#00CED1", "#FF6347", "#9370DB"];
 
     const frame = () => {
-  var timeLeft = end - Date.now();
+      var timeLeft = end - Date.now();
 
-  if (timeLeft <= 0) {
-    return;
-  }
+      if (timeLeft <= 0) {
+        return;
+      }
 
-  var particleCount = 50 * (timeLeft / duration);
+      var particleCount = 50 * (timeLeft / duration);
 
-  // Firework explosion from random position (left side)
-  confetti({
-    particleCount,
-    startVelocity: 30,
-    spread: 360, // Full circle explosion
-    ticks: 60,
-    origin: {
-      x: randomInRange(0.1, 0.3), // Random left area
-      y: Math.random() - 0.2, // Start higher up
-    },
-    colors: colors,
-    gravity: 1,
-    scalar: 1.2,
-  });
+      // Firework explosion from random position (left side)
+      confetti({
+        particleCount,
+        startVelocity: 30,
+        spread: 360, // Full circle explosion
+        ticks: 60,
+        origin: {
+          x: randomInRange(0.1, 0.3), // Random left area
+          y: Math.random() - 0.2, // Start higher up
+        },
+        colors: colors,
+        gravity: 1,
+        scalar: 1.2,
+      });
 
-  // Firework explosion from random position (right side)
-  confetti({
-    particleCount,
-    startVelocity: 30,
-    spread: 360, // Full circle explosion
-    ticks: 60,
-    origin: {
-      x: randomInRange(0.7, 0.9), // Random right area
-      y: Math.random() - 0.2, // Start higher up
-    },
-    colors: colors,
-    gravity: 1,
-    scalar: 1.2,
-  });
+      // Firework explosion from random position (right side)
+      confetti({
+        particleCount,
+        startVelocity: 30,
+        spread: 360, // Full circle explosion
+        ticks: 60,
+        origin: {
+          x: randomInRange(0.7, 0.9), // Random right area
+          y: Math.random() - 0.2, // Start higher up
+        },
+        colors: colors,
+        gravity: 1,
+        scalar: 1.2,
+      });
 
-  // Center firework (occasional)
-  if (Math.random() > 0.7) {
-    confetti({
-      particleCount: particleCount * 1.5,
-      startVelocity: 40,
-      spread: 360,
-      ticks: 60,
-      origin: {
-        x: randomInRange(0.4, 0.6), // Center area
-        y: Math.random() - 0.2,
-      },
-      colors: colors,
-      gravity: 1,
-      scalar: 1.5,
-    });
-  }
+      // Center firework (occasional)
+      if (Math.random() > 0.7) {
+        confetti({
+          particleCount: particleCount * 1.5,
+          startVelocity: 40,
+          spread: 360,
+          ticks: 60,
+          origin: {
+            x: randomInRange(0.4, 0.6), // Center area
+            y: Math.random() - 0.2,
+          },
+          colors: colors,
+          gravity: 1,
+          scalar: 1.5,
+        });
+      }
 
-  if (Date.now() < end) {
-    requestAnimationFrame(frame);
-  }
-};
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
 
-// Helper function for random range
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
+    // Helper function for random range
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
 
     frame();
   };
@@ -248,7 +248,7 @@ function randomInRange(min, max) {
         </Typography>
       )}
 
-      <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
+      <Canvas camera={{ position: [0, 4, 5], fov: 50, rotation: [Math.PI / -6, 2, 0] }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <pointLight position={[-5, 5, 5]} intensity={0.5} />

@@ -300,7 +300,7 @@ const BirthdayPage = () => {
                   gutterBottom
                   align="center"
                   sx={{
-                    mb: isMobile ? 3 : 2,
+                    mb: isMobile ? 2 : 2,
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 700,
                     background:
@@ -317,7 +317,7 @@ const BirthdayPage = () => {
                   variant="body2"
                   align="center"
                   sx={{
-                    mb: 3,
+                    
                     fontFamily: "Poppins, sans-serif",
                     color: "#666",
                     maxWidth: "80%",
